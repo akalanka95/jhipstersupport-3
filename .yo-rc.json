@@ -1,0 +1,34 @@
+{
+    "generator-jhipster": {
+        "promptValues": {
+            "packageName": "com.epi.jhipster"
+        },
+        "jhipsterVersion": "5.8.1",
+        "applicationType": "monolith",
+        "baseName": "jhipstersupport3",
+        "packageName": "com.epi.jhipster",
+        "packageFolder": "com/epi/jhipster",
+        "serverPort": "8080",
+        "authenticationType": "jwt",
+        "cacheProvider": "no",
+        "websocket": "spring-websocket",
+        "databaseType": "sql",
+        "devDatabaseType": "h2Memory",
+        "prodDatabaseType": "mysql",
+        "searchEngine": false,
+        "messageBroker": false,
+        "serviceDiscoveryType": "eureka",
+        "buildTool": "maven",
+        "enableSwaggerCodegen": false,
+        "jwtSecretKey": "YzhjZWFkZDIxNTg1MjhiY2I0YzhkZjY1YmUwNTc4MDUyMDllZTE3MTA1NTRkYmJiZjhhOGM0ODQ1NDE2MjAzN2NmNWE3MTdmMTE0NTg3MGU5YzI0YzM3MWNkMjU2ZDJmOWJkMGU4MGI0NjAzYWM4M2JmZjY4YjU1OWM0NjVjMDE=",
+        "clientFramework": "angularX",
+        "useSass": true,
+        "clientPackageManager": "npm",
+        "testFrameworks": ["gatling"],
+        "jhiPrefix": "jhi",
+        "entitySuffix": "",
+        "dtoSuffix": "DTO",
+        "otherModules": [],
+        "enableTranslation": false
+    }
+}
