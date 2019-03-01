@@ -23,7 +23,6 @@ import java.time.Instant;
  */
 @Entity
 @Table(name = "jhi_user")
-
 public class User extends AbstractAuditingEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -31,6 +30,35 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "department_id")
+    private Department department;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "company_id")
+    private Company company;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private Set<Company_Product_Module> company_product_modules = new HashSet<>();
+
+    @OneToMany(mappedBy = "user1", cascade = CascadeType.ALL)
+    private Set<Ticket> ticket = new HashSet<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private Set<UserProductDetails> userProductDetails = new HashSet<>();
+
+    @OneToMany(mappedBy = "user2", cascade = CascadeType.ALL)
+    private Set<UserProduct> userProduct= new HashSet<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private Set<TicketComment> ticketComment = new HashSet<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private Set<TicketAssign> ticketAssign = new HashSet<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private Set<TicketUserTracker> ticketUserTracker = new HashSet<>();
 
     @NotNull
     @Pattern(regexp = Constants.LOGIN_REGEX)
@@ -89,8 +117,60 @@ public class User extends AbstractAuditingEntity implements Serializable {
         joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
         inverseJoinColumns = {@JoinColumn(name = "authority_name", referencedColumnName = "name")})
 
+
+
     @BatchSize(size = 20)
     private Set<Authority> authorities = new HashSet<>();
+
+
+    public Set<TicketComment> getTicketComment() {
+        return ticketComment;
+    }
+
+    public void setTicketComment(Set<TicketComment> ticketComment) {
+        this.ticketComment = ticketComment;
+    }
+
+    public Set<UserProduct> getUserProduct() {
+        return userProduct;
+    }
+
+    public void setUserProduct(Set<UserProduct> userProduct) {
+        this.userProduct = userProduct;
+    }
+
+    public Set<Company_Product_Module> getCompany_product_modules() {
+        return company_product_modules;
+    }
+
+
+    public Set<UserProductDetails> getUserProductDetails() {
+        return userProductDetails;
+    }
+
+    public void setUserProductDetails(Set<UserProductDetails> userProductDetails) {
+        this.userProductDetails = userProductDetails;
+    }
+
+    public void setCompany_product_modules(Set<Company_Product_Module> company_product_modules) {
+        this.company_product_modules = company_product_modules;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
+//    public Set<Ticket> getTicket() {
+//        return ticket;
+//    }
+//
+//    public void setTicket(Set<Ticket> ticket) {
+//        this.ticket = ticket;
+//    }
 
     public Long getId() {
         return id;
@@ -227,5 +307,29 @@ public class User extends AbstractAuditingEntity implements Serializable {
             ", langKey='" + langKey + '\'' +
             ", activationKey='" + activationKey + '\'' +
             "}";
+    }
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
+
+    public Set<TicketAssign> getTicketAssign() {
+        return ticketAssign;
+    }
+
+    public void setTicketAssign(Set<TicketAssign> ticketAssign) {
+        this.ticketAssign = ticketAssign;
+    }
+
+    public Set<TicketUserTracker> getTicketUserTracker() {
+        return ticketUserTracker;
+    }
+
+    public void setTicketUserTracker(Set<TicketUserTracker> ticketUserTracker) {
+        this.ticketUserTracker = ticketUserTracker;
     }
 }

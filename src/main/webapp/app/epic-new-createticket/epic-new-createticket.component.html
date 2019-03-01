@@ -1,0 +1,225 @@
+
+
+    <nb-card>
+      <nb-card-header><h4>Ticket Info</h4></nb-card-header>
+      <nb-card-body>
+
+        <div class="row">
+          <div class="col-md-3">
+            <div class="form-group">
+              <label >Product</label>
+              <select class="form-control">
+                <option (click)="selectCompanyProduct(list)" *ngFor="let list of companyProductDetailsList">{{list.companyProductModule.product_module.product.productName}}</option>
+                <!--<option>SOFTWARE</option>-->
+              </select></div>
+          </div>
+          <div class="col-md-3">
+          <div class="form-group">
+          <label >Product Category</label>
+          <select class="form-control">
+          <option>HARDWARE</option>
+            <option>SOFTWARE</option>
+          </select></div>
+        </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label >Ticket Priority</label>
+              <select class="form-control" >
+                <option (click)="ticketPriority(list)" *ngFor="let list of ticketPriorityArray">{{list}}</option>
+              </select></div>
+          </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label >Type</label>
+                    <select class="form-control" >
+                        <option (click)="selectType(list)" *ngFor="let list of ticketTypeArray">{{list}}</option>
+                    </select></div>
+            </div>
+        </div>
+
+          <button [disabled]="bProductInfo" type="button" class="btn btn-sm btn-dark float-right" data-toggle="modal" data-target="#exampleModal">
+              Product Information
+          </button>
+
+
+          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                      <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Product Information</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                          </button>
+                      </div>
+                      <div class="modal-body">
+                          <div class="row">
+                          <div class="col-md-4">
+                          <div class="form-group">
+                          <label >Warranty Expiry/Status</label>
+                          <input  type="text" class="form-control"  placeholder="Warranty Expiry/Status">
+                          </div>
+                          </div>
+                          <div class="col-md-4">
+                          <div class="form-group">
+                          <label >AMC No</label>
+                          <input  type="text" class="form-control"  placeholder="AMC No">
+                          </div>
+                          </div>
+                          <div class="col-md-4">
+                          <div class="form-group">
+                          <label >AMC Expiry/status</label>
+                          <input  type="text" class="form-control"  placeholder="AMC Expiry/status">
+                          </div>
+                          </div>
+                          </div>
+                          <div class="row">
+                          <div class="col-md-4">
+                          <div class="form-group">
+                          <label >Brand</label>
+                          <input  type="text" class="form-control"  placeholder="Brand">
+                          </div>
+                          </div>
+                          <div class="col-md-4">
+                          <div class="form-group">
+                          <label >Model</label>
+                          <input  type="text" class="form-control"  placeholder="Model">
+                          </div>
+                          </div>
+                          <div class="col-md-4">
+                          <div class="form-group">
+                          <label >Serial No</label>
+                          <input  type="text" class="form-control"  placeholder="Serial No">
+                          </div>
+                          </div>
+                          </div>
+                          <div class="row">
+                          <div class="col-md-4">
+                          <div class="form-group">
+                          <label >Module</label>
+                          </div>
+                          </div>
+                          <div class="col-md-4">
+                          <div class="form-group">
+                          <label >Description</label>
+                           </div>
+                          </div>
+                          <div class="col-md-4">
+                          <div class="form-group">
+                          <label >Version</label>
+                          </div>
+                          </div>
+                          </div>
+
+                          <div class="row" *ngFor="let list of companyProductDetail">
+                              <div class="col-md-4">
+                                  <div class="form-group">
+                                      <input disabled  type="text" class="form-control" value="{{list.companyProductModule.product_module.module.moduleName}}">
+                                  </div>
+                              </div>
+                              <div class="col-md-4">
+                                  <div class="form-group">
+                                      <input  disabled type="text" class="form-control" value="{{list.companyProductModule.description}}" >
+                                  </div>
+                              </div>
+                              <div class="col-md-4">
+                                  <div class="form-group">
+                                      <input  disabled type="text" class="form-control" value="{{list.companyProductModule.version}}">
+                                  </div>
+                              </div>
+                          </div>
+
+                          <!--<div class="row">-->
+                          <!--<div class="col-md-4">-->
+                          <!--<div class="form-group">-->
+                          <!--<input  type="text" class="form-control" >-->
+                          <!--</div>-->
+                          <!--</div>-->
+                          <!--<div class="col-md-4">-->
+                          <!--<div class="form-group">-->
+                          <!--<input  type="text" class="form-control" >-->
+                          <!--</div>-->
+                          <!--</div>-->
+                          <!--<div class="col-md-4">-->
+                          <!--<div class="form-group">-->
+                          <!--<input  type="text" class="form-control">-->
+                          <!--</div>-->
+                          <!--</div>-->
+                          <!--</div>-->
+                          <!--<div class="row">-->
+                          <!--<div class="col-md-4">-->
+                          <!--<div class="form-group">-->
+                          <!--<input  type="text" class="form-control" >-->
+                          <!--</div>-->
+                          <!--</div>-->
+                          <!--<div class="col-md-4">-->
+                          <!--<div class="form-group">-->
+                          <!--<input  type="text" class="form-control" >-->
+                          <!--</div>-->
+                          <!--</div>-->
+                          <!--<div class="col-md-4">-->
+                          <!--<div class="form-group">-->
+                          <!--<input  type="text" class="form-control">-->
+                          <!--</div>-->
+                          <!--</div>-->
+                          <!--</div>-->
+
+                      </div>
+                      <div class="modal-footer">
+                          <!--<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
+                          <!--<button type="button" class="btn btn-primary" data-dismiss="modal">Reject</button>-->
+                      <!---->
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+
+        <!--<hr>-->
+        <h4>Fault Information</h4>
+          <hr>
+          <form name="f" role="form" novalidate (ngSubmit)="save()" #f="ngForm">
+        <div class="row">
+          <div class="col-md-8">
+            <div class="form-group">
+              <label></label>
+              <input name="subject" required
+                     [(ngModel)]="newTicket.subject" #subject="ngModel"
+                     type="text" class="form-control" minlength="6"  placeholder="Subject">
+                <div *ngIf="subject.dirty && subject.invalid">
+                    <small class="form-text text-danger"
+                           *ngIf="subject.errors.minlength"
+                    >
+                        This field should be longer than 6 characters.
+                    </small>
+                </div>
+
+            </div>
+        </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+              <editor name="description" [(ngModel)]="newTicket.description" apiKey="test"></editor>
+          </div>
+        </div>
+        <!--<div class="row" style="margin-top: 10px;">-->
+          <!--<div class="col-md-4">-->
+            <!--<div class="form-group">-->
+              <!--<label >Attachment</label>-->
+              <!--<button class="btn btn-success" style="float: right">Drop Files To Attach</button>-->
+              <!--</div>-->
+          <!--</div>-->
+        <!--</div>-->
+        <hr>
+
+        <button type="submit"
+                [disabled]="f.form.invalid"
+                (click)="createNewTicket(3000)" class="btn btn-danger" style="float: right">Create Ticket</button>
+
+          </form>
+      </nb-card-body>
+
+</nb-card>
+
+
+
+

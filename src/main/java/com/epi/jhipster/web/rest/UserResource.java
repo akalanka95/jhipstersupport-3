@@ -1,7 +1,9 @@
 package com.epi.jhipster.web.rest;
 
 import com.epi.jhipster.config.Constants;
+import com.epi.jhipster.domain.Company;
 import com.epi.jhipster.domain.User;
+import com.epi.jhipster.repository.CompanyRepository;
 import com.epi.jhipster.repository.UserRepository;
 import com.epi.jhipster.security.AuthoritiesConstants;
 import com.epi.jhipster.service.MailService;
@@ -16,6 +18,7 @@ import io.github.jhipster.web.util.ResponseUtil;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
@@ -64,6 +67,8 @@ public class UserResource {
     private final UserRepository userRepository;
 
     private final MailService mailService;
+
+
 
     public UserResource(UserService userService, UserRepository userRepository, MailService mailService) {
 

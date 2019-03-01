@@ -1,41 +1,254 @@
-<div class="row">
-    <div class="col-md-3">
-        <span class="hipster img-fluid rounded"></span>
-    </div>
-    <div class="col-md-9">
-        <h1 class="display-4">Welcome, Java Hipster!</h1>
-        <p class="lead">This is your homepage</p>
+<!--<div class="row">-->
+<!--<div class="col-md-3">-->
+<!--<span class="hipster img-fluid rounded"></span>-->
+<!--</div>-->
+<!--<div class="col-md-9">-->
+<!--<h1 class="display-4">Welcome, Java Hipster!</h1>-->
+<!--<p class="lead">This is your homepage</p>-->
 
-        <div [ngSwitch]="isAuthenticated()">
-            <div class="alert alert-success" *ngSwitchCase="true">
-                <span id="home-logged-message" *ngIf="account"
-                   > You are logged in as user "{{account.login}}". </span>
-            </div>
+<!--<div [ngSwitch]="isAuthenticated()">-->
+<!--<div class="alert alert-success" *ngSwitchCase="true">-->
+<!--<span id="home-logged-message" *ngIf="account"-->
+<!--&gt; You are logged in as user "{{account.login}}". </span>-->
+<!--</div>-->
 
-            <div class="alert alert-warning" *ngSwitchCase="false">
-                <span>If you want to </span>
-                <a class="alert-link" (click)="login()">sign in</a><span>, you can try the default accounts:<br/>- Administrator (login="admin" and password="admin") <br/>- User (login="user" and password="user").</span>
+<!--<div class="alert alert-warning" *ngSwitchCase="false">-->
+<!--<span>If you want to </span>-->
+<!--<a class="alert-link" (click)="login()">sign in</a><span>, you can try the default accounts:<br/>- Administrator (login="admin" and password="admin") <br/>- User (login="user" and password="user").</span>-->
+<!--</div>-->
+<!--<div class="alert alert-warning" *ngSwitchCase="false">-->
+<!--<span>You don't have an account yet?</span>&nbsp;-->
+<!--<a class="alert-link" routerLink="register">Register a new account</a>-->
+<!--</div>-->
+<!--</div>-->
+
+<!--<p>-->
+<!--If you have any question on JHipster:-->
+<!--</p>-->
+
+<!--<ul>-->
+<!--<li><a href="https://www.jhipster.tech/" target="_blank" rel="noopener">JHipster homepage</a></li>-->
+<!--<li><a href="http://stackoverflow.com/tags/jhipster/info" target="_blank" rel="noopener">JHipster on Stack Overflow</a></li>-->
+<!--<li><a href="https://github.com/jhipster/generator-jhipster/issues?state=open" target="_blank" rel="noopener">JHipster bug tracker</a></li>-->
+<!--<li><a href="https://gitter.im/jhipster/generator-jhipster" target="_blank" rel="noopener">JHipster public chat room</a></li>-->
+<!--<li><a href="https://twitter.com/java_hipster" target="_blank" rel="noopener">follow @java_hipster on Twitter</a></li>-->
+<!--</ul>-->
+
+<!--<p>-->
+<!--<span>If you like JHipster, don't forget to give us a star on</span> <a href="https://github.com/jhipster/generator-jhipster" target="_blank" rel="noopener">GitHub</a>!-->
+<!--</p>-->
+<!--</div>-->
+<!--</div>-->
+
+<!--// Dashboard-->
+
+<!--<div class="row">-->
+<!--&lt;!&ndash;<div class="col-md-4">&ndash;&gt;-->
+<!--&lt;!&ndash;<nb-card>&ndash;&gt;-->
+<!--&lt;!&ndash;<nb-card-header>My Open Tickets</nb-card-header>&ndash;&gt;-->
+<!--&lt;!&ndash;<nb-card-body>0</nb-card-body>&ndash;&gt;-->
+<!--&lt;!&ndash;</nb-card>&ndash;&gt;-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
+<!--<div class="col-md-4">-->
+<!--<nb-card class="card card-danger">-->
+<!--<nb-card-header>My In Progress Tickets</nb-card-header>-->
+<!--<nb-card-body>0</nb-card-body>-->
+<!--</nb-card>-->
+<!--</div>-->
+<!--<div class="col-md-4">-->
+<!--<nb-card class="card card-danger">-->
+<!--<nb-card-header>My In Progress Tickets</nb-card-header>-->
+<!--<nb-card-body>0</nb-card-body>-->
+<!--</nb-card>-->
+<!--</div>-->
+<!--<div class="col-md-4">-->
+<!--<nb-card class="card card-danger">-->
+<!--<nb-card-header>My In Progress Tickets</nb-card-header>-->
+<!--<nb-card-body>0</nb-card-body>-->
+<!--</nb-card>-->
+<!--</div>-->
+<!--</div>-->
+
+<!--<div class="row">-->
+<!--<div class="col-md-12">-->
+<!--<nb-card>-->
+<!--<nb-card-header>My Tickets</nb-card-header>-->
+<!--<nb-card-body>-->
+<!--<table class="table">-->
+<!--<thead class="thead-dark">-->
+<!--<tr>-->
+<!--<th scope="col">Ticket No</th>-->
+<!--<th scope="col">Date/Time</th>-->
+<!--<th scope="col">Type</th>-->
+<!--<th scope="col">Status</th>-->
+<!--<th scope="col">Priority</th>-->
+<!--<th scope="col">Subject</th>-->
+<!--<th scope="col">Current Status Age</th>-->
+<!--<th scope="col">Ticket Age</th>-->
+<!--</tr>-->
+<!--</thead>-->
+<!--<tbody>-->
+<!--<tr>-->
+<!--<td>T123</td>-->
+<!--<td>1</td>-->
+<!--<td>1</td>-->
+<!--<td>1</td>-->
+<!--<td>1</td>-->
+<!--<td>1</td>-->
+<!--<td>1</td>-->
+<!--<td>1</td>-->
+
+<!--</tr>-->
+
+<!--</tbody>-->
+<!--</table>-->
+<!--</nb-card-body>-->
+<!--</nb-card>-->
+<!--</div>-->
+<!--</div>-->
+
+
+<!--Sign in ##############################################-->
+<nb-card style="padding: 10px">
+<div  [ngSwitch]="isAuthenticated()">
+
+    <div *ngSwitchCase="true">
+
+
+        <h5>DashBoard</h5>
+        <hr>
+        <div class="row">
+            <div class="col-md-4">
+                <nb-card class="card card-danger">
+                    <nb-card-header>My Open Tickets</nb-card-header>
+                    <nb-card-body>0</nb-card-body>
+                </nb-card>
             </div>
-            <div class="alert alert-warning" *ngSwitchCase="false">
-                <span>You don't have an account yet?</span>&nbsp;
-                <a class="alert-link" routerLink="register">Register a new account</a>
+            <div class="col-md-4">
+                <nb-card class="card card-danger">
+                    <nb-card-header>My In Progress Tickets</nb-card-header>
+                    <nb-card-body>0</nb-card-body>
+                </nb-card>
+            </div>
+            <div class="col-md-4">
+                <nb-card class="card card-danger">
+                    <nb-card-header>My Closed Tickets</nb-card-header>
+                    <nb-card-body>0</nb-card-body>
+                </nb-card>
             </div>
         </div>
 
-        <p>
-            If you have any question on JHipster:
-        </p>
+        <div class="row">
+            <div class="col-md-8">
+            <nb-card>
+                    <nb-card-header>My Tickets</nb-card-header>
+                    <nb-card-body>
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                <tr jhiSort >
+                                    <th><span>Ticket No</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                                    <th><span>Date/Time</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                                    <th><span>Type</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                                    <th><span>Status</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                                    <th><span>Priority</span></th>
+                                    <th><span>Subject</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                                    <th><span>Current Status Age</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                                    <th><span>Ticket Age</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                                </tr>
+                                </thead>
+                                <tbody *ngFor="let list of ticketAssignListByUser">
+                                <tr>
+                                    <td>
+                                        <span class="badge badge-info">#T1234</span>
+                                    </td>
+                                    <td>13/02/19 14:20 </td>
+                                    <td><span class="badge badge-primary">{{list.type}}</span></td>
+                                    <td><span>ASSIGNED QA</span></td>
+                                    <td><span class="badge badge-danger">{{list.priority}}</span></td>
+                                    <td><b>{{list.subject}}</b></td>
+                                    <td>2 Days</td>
+                                    <td>3 Days</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </nb-card-body>
+            </nb-card>
+            </div>
+            <div class="col-md-4">
+                <nb-calendar [(date)]="date"></nb-calendar>
+            </div>
+        </div>
 
-        <ul>
-            <li><a href="https://www.jhipster.tech/" target="_blank" rel="noopener">JHipster homepage</a></li>
-            <li><a href="http://stackoverflow.com/tags/jhipster/info" target="_blank" rel="noopener">JHipster on Stack Overflow</a></li>
-            <li><a href="https://github.com/jhipster/generator-jhipster/issues?state=open" target="_blank" rel="noopener">JHipster bug tracker</a></li>
-            <li><a href="https://gitter.im/jhipster/generator-jhipster" target="_blank" rel="noopener">JHipster public chat room</a></li>
-            <li><a href="https://twitter.com/java_hipster" target="_blank" rel="noopener">follow @java_hipster on Twitter</a></li>
-        </ul>
+    </div>
 
-        <p>
-            <span>If you like JHipster, don't forget to give us a star on</span> <a href="https://github.com/jhipster/generator-jhipster" target="_blank" rel="noopener">GitHub</a>!
-        </p>
+    <div *ngSwitchCase="false">
+        <nb-card>
+            <nb-card-body>
+        <div class="modal-header">
+            <h4 class="modal-title">Sign in</h4>
+            <!--<button aria-label="Close" data-dismiss="modal" class="close" type="button" (click)="activeModal.dismiss('closed')"><span aria-hidden="true">x</span>-->
+            <!--</button>-->
+        </div>
+        <div class="modal-body">
+            <div class="row justify-content-right">
+                <!--<div class="col-md-5">-->
+                <!--<div class="alert alert-danger" *ngIf="authenticationError">-->
+                <!--<strong>Failed to sign in!</strong> Please check your credentials and try again.-->
+                <!--</div>-->
+                <!--</div>-->
+                <div class="col-md-8">
+                    <img style="height:80%; width: 90%" src="../../content/images/Epic-Lanka.jpg">
+                </div>
+                <div class="col-md-4" style="margin-top: 5%">
+                    <div class="alert alert-danger" *ngIf="authenticationError">
+                        <strong>Failed to sign in!</strong> Please check your credentials and try again.
+                    </div>
+                    <form class="form" role="form" (ngSubmit)="login()">
+                        <div class="form-group">
+                            <label class="username-label" for="username">Login</label>
+                            <input type="text" class="form-control" name="username" id="username" placeholder="Your username"
+                                   [(ngModel)]="username">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Passwordsss</label>
+                            <input type="password" class="form-control" name="password" id="password" placeholder="Your password"
+                                   [(ngModel)]="password">
+                        </div>
+                        <div class="form-check">
+                            <label class="form-check-label" for="rememberMe">
+                                <input class="form-check-input" type="checkbox" name="rememberMe" id="rememberMe" [(ngModel)]="rememberMe" checked>
+                                <span>Remember me</span>
+                            </label>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Sign in</button>
+                    </form>
+                    <p></p>
+                    <div class="alert alert-warning">
+                        <a class="alert-link" (click)="requestResetPassword()">Did you forget your password?</a>
+                    </div>
+
+
+                    <nb-card>
+                        <nb-card-body>
+                            <h6>Date - 2/15/2019</h6>
+                            <h6>Review By - Mr Nuwan Sanjeewa</h6>
+                            <h6>Assign To Public - Mr Samindha Jayawardena </h6>
+                            <h6>Designed By - Akalanka </h6>
+                            <h6>Version - V1.0</h6>
+                        </nb-card-body>
+                    </nb-card>
+
+                    <!--<div class="alert alert-warning">-->
+                    <!--<span>You don't have an account yet?</span>-->
+                    <!--<a class="alert-link" (click)="register()">Register a new account</a>-->
+                    <!--</div>-->
+                </div>
+            </div>
+        </div>
+            </nb-card-body>
+        </nb-card>
     </div>
 </div>
+</nb-card>

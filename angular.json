@@ -7,7 +7,18 @@
             "root": "",
             "sourceRoot": "src/main/webapp",
             "projectType": "application",
-            "architect": {}
+            "architect": {
+                "build": {
+                    "builder": "",
+                    "options": {
+                        "styles": [
+                            "./node_modules/bootstrap/dist/css/bootstrap.css",
+                            "./node_modules/@nebular/theme/styles/prebuilt/default.scss",
+                            "./node_modules/@angular/material/_theming.scss"
+                        ]
+                    }
+                }
+            }
         }
     },
     "defaultProject": "jhipstersupport-3",

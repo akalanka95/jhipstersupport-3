@@ -1,0 +1,322 @@
+<nb-card>
+
+  <nb-card-header>My Open Tickets</nb-card-header>
+  <nb-card-body>
+    <!--<table class="table">-->
+      <!--<thead class="thead-dark">-->
+      <!--<tr>-->
+        <!--<th scope="col">Ticket No</th>-->
+        <!--<th scope="col">Date/Time</th>-->
+        <!--<th scope="col">Type</th>-->
+        <!--<th scope="col">Status</th>-->
+        <!--<th scope="col">Priority</th>-->
+        <!--<th scope="col">Subject</th>-->
+        <!--<th scope="col">Current Status Age</th>-->
+        <!--<th scope="col">Ticket Age</th>-->
+        <!--<th scope="col">Action</th>-->
+      <!--</tr>-->
+      <!--</thead>-->
+      <!--<tbody>-->
+      <!--<tr>-->
+        <!--<td>T123</td>-->
+        <!--<td>1</td>-->
+        <!--<td>1</td>-->
+        <!--<td>1</td>-->
+        <!--<td>1</td>-->
+        <!--<td>1</td>-->
+        <!--<td>1</td>-->
+        <!--<td>1</td>-->
+        <!--<td><button class="btn btn-sm btn-success">Accept</button>-->
+          <!--&lt;!&ndash;<button class="btn btn-sm btn-danger"&ndash;&gt;-->
+                  <!--&lt;!&ndash;data-toggle="modal" data-target="#exampleModal">Reject</button>&ndash;&gt;-->
+          <!--<button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#exampleModal">-->
+            <!--Reject-->
+          <!--</button>-->
+
+          <!--<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
+            <!--<div class="modal-dialog" role="document">-->
+              <!--<div class="modal-content">-->
+                <!--<div class="modal-header">-->
+                  <!--<h5 class="modal-title" id="exampleModalLabel">Reject Ticket</h5>-->
+                  <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+                    <!--<span aria-hidden="true">&times;</span>-->
+                  <!--</button>-->
+                <!--</div>-->
+                <!--<div class="modal-body">-->
+                  <!--<div class="form-group">-->
+                    <!--<label >Reason</label>-->
+                    <!--<input type="text" class="form-control" >-->
+                  <!--</div>-->
+                <!--</div>-->
+                <!--<div class="modal-footer">-->
+                  <!--<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
+                  <!--<button type="button" class="btn btn-primary" data-dismiss="modal">Reject</button>-->
+                <!--</div>-->
+              <!--</div>-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</td>-->
+      <!--</tr>-->
+      <!--</tbody>-->
+    <!--</table>-->
+
+
+      <div class="table-responsive">
+          <table class="table table-striped">
+              <thead>
+              <tr jhiSort >
+                  <th><span>Ticket No</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                  <th><span>Date/Time</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                  <th><span>Type</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                  <th><span>Status</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                  <th><span>Priority</span></th>
+                  <th><span>Subject</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                  <th><span>Current Status Age</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                  <th><span>Ticket Age</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                  <th><span>Action</span></th>
+              </tr>
+              </thead>
+              <tbody>
+
+              <tr *ngFor="let list of ticketAssignListByUser ">
+                  <!--<span *ngIf="list.accepted==='SUPPORT INPROGRESS'"-->
+                    <!--[ngStyle]={'background-color':'red'}-->
+                  <!--&gt;-->
+                  <!--</span>-->
+                  <td>
+                      <span class="badge badge-info">#T1234</span>
+                  </td>
+                  <td>{{list.ticket.ticketDate}} - {{list.ticket.ticketTime}}</td>
+                  <td><span class="badge badge-primary">{{list.ticket.type}}</span></td>
+                  <td><span>ASSIGNED SUPPORT</span></td>
+                  <td><span *ngIf="list.ticket.priority ==='MEDIUM'" class="badge badge-success">{{list.ticket.priority}}</span>
+                      <span *ngIf="list.ticket.priority ==='HIGH'" class="badge badge-info">{{list.ticket.priority}}</span>
+                      <span *ngIf="list.ticket.priority ==='HIGHEST'" class="badge badge-danger">{{list.ticket.priority}}</span>
+                      <span *ngIf="list.ticket.priority ==='LOW'" class="badge badge-primary">{{list.ticket.priority}}</span>
+                  </td>
+                  <td><b>{{list.ticket.subject}}</b></td>
+                  <td>2 Days</td>
+                  <td>3 Days</td>
+                  <span *ngIf="currentLoggedUser.department.departmentName === 'Support'">
+                  <td *ngIf="list.accepted==='null'">
+                      <button  (click)="acceptTicket(list)" class="btn btn-sm btn-success" data-toggle="modal" data-target="#modalAccept">Accept</button>
+                      <!--<button class="btn btn-sm btn-danger"-->
+                      <!--data-toggle="modal" data-target="#exampleModal">Reject</button>-->
+                      <button (click)="rejectTicket(list)" type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#exampleModal">
+                          Reject
+                      </button>
+
+                      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog" role="document">
+                              <div class="modal-content">
+                                  <div class="modal-header">
+                                      <h5 class="modal-title" id="exampleModalLabel">Reject Ticket</h5>
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                          <span aria-hidden="true">&times;</span>
+                                      </button>
+                                  </div>
+                                  <div class="modal-body">
+                                      <form name="f" role="form" novalidate (ngSubmit)="save()" #f="ngForm">
+                                      <div class="form-group">
+                                          <label >Reason</label>
+                                          <input  name="reason" required minlength="5" type="text" class="form-control" [(ngModel)]=" ticketRejectedReason" >
+
+                                      </div>
+                                      </form>
+                                  </div>
+                                  <div class="modal-footer">
+                                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                      <button [disabled]="f.form.invalid" type="button" (click)="rejectTicketModel()" class="btn btn-primary" data-dismiss="modal">Reject</button>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="modal fade" id="modalAccept" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+                          <div class="modal-dialog" role="document">
+                              <div class="modal-content">
+                                  <div class="modal-header">
+                                      <h5 class="modal-title" id="exampleModalLabel1">Accept Ticket</h5>
+                                  </div>
+                                  <div class="modal-body">
+                                      <div class="form-group">
+                                          <p>Are you sure you want to accept the Ticket ?</p>
+                                      </div>
+                                  </div>
+                                  <div class="modal-footer">
+                                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                      <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="acceptTicketModel()">Accept</button>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+
+
+                  </td>
+                  <td *ngIf="list.accepted==='accepted'">
+                      <button class="btn btn-sm btn-success" [routerLink]="['/user/ticket/process/' , list.ticket.id,list.id]">View Ticket</button>
+                  </td>
+                  <td *ngIf="list.accepted==='SUPPORT INPROGRESS'">
+                      <button class="btn btn-sm btn-success" [routerLink]="['/user/ticket/process/' , list.ticket.id,list.id]">IN-PROGRESS</button>
+                  </td>
+                  <td *ngIf="list.accepted==='SUPPORT ASSIGNED TO QA'">
+                      <button class="btn btn-sm btn-success" disabled>ASSIGNED TO QA</button>
+                  </td>
+                  <td *ngIf="list.accepted==='rejected'">
+                  <button class="btn btn-sm btn-success" disabled>Ticket Rejected</button>
+                  </td>
+                  <td *ngIf="list.accepted ==='done'">
+                      <button class="btn btn-sm btn-success" disabled>DONE</button>
+                  </td>
+                  </span>
+                  <span *ngIf="currentLoggedUser.department.departmentName === 'QA'">
+                     <span *ngIf="list.accepted ==='QA ASSIGNED BY MANAGER';else second">
+                          <button  (click)="acceptTicket(list)" class="btn btn-sm btn-success" data-toggle="modal" data-target="#modalAccept12">Accept</button>
+                          <button (click)="rejectTicket(list)" type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#exampleModal12">
+                            Reject
+                          </button>
+                     </span>
+                       <ng-template #second>
+                              <span *ngIf="list.accepted==='QA ACCEPTED';else third"> <button class="btn btn-sm btn-success" [routerLink]="['/user/ticket/process/' , list.ticket.id,list.id]">View Ticket</button>
+                              </span>
+                       </ng-template>
+                      <ng-template #third>
+                              <span *ngIf="list.accepted==='QA INPROGRESS';else fourth"> <button class="btn btn-sm btn-success" [routerLink]="['/user/ticket/process/' , list.ticket.id,list.id]">IN PROGRESS</button>
+                              </span>
+                       </ng-template>
+                      <ng-template #fourth>
+                              <span *ngIf="list.accepted==='QA REJECTED';else fifth"> <button class="btn btn-sm btn-success" disabled >TICKET REJECTED</button>
+                              </span>
+                       </ng-template>
+                      <ng-template #fifth>
+                              <span *ngIf="list.accepted==='QA ASSIGNED TO DEVELOPMENT'"> <button class="btn btn-sm btn-success" disabled >QA ASSIGNED DEVELOPMENT</button>
+                              </span>
+                       </ng-template>
+
+                      <div class="modal fade" id="exampleModal12" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel123" aria-hidden="true">
+                          <div class="modal-dialog" role="document">
+                              <div class="modal-content">
+                                  <div class="modal-header">
+                                      <h5 class="modal-title" id="exampleModalLabel123">Reject Ticket</h5>
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                          <span aria-hidden="true">&times;</span>
+                                      </button>
+                                  </div>
+                                  <div class="modal-body">
+                                      <form name="f" role="form" novalidate (ngSubmit)="save()" #f="ngForm">
+                                      <div class="form-group">
+                                          <label >Reason</label>
+                                          <input  name="reason" required minlength="5" type="text" class="form-control" [(ngModel)]=" ticketRejectedReason" >
+
+                                      </div>
+                                      </form>
+                                  </div>
+                                  <div class="modal-footer">
+                                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                      <button [disabled]="f.form.invalid" type="button" (click)="rejectTicketModelQA()" class="btn btn-primary" data-dismiss="modal">Reject</button>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="modal fade" id="modalAccept12" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1234" aria-hidden="true">
+                          <div class="modal-dialog" role="document">
+                              <div class="modal-content">
+                                  <div class="modal-header">
+                                      <h5 class="modal-title" id="exampleModalLabel1234">Accept Ticket</h5>
+                                  </div>
+                                  <div class="modal-body">
+                                      <div class="form-group">
+                                          <p>Are you sure you want to accept the Ticket ?</p>
+                                      </div>
+                                  </div>
+                                  <div class="modal-footer">
+                                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                      <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="acceptTicketModelQA()">Accept</button>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+
+                  </span>
+
+
+                  <span *ngIf="currentLoggedUser.department.departmentName === 'Dev'">
+                     <span *ngIf="list.accepted ==='DEV ASSIGNED BY MANAGER';else second">
+                          <button  (click)="acceptTicket(list)" class="btn btn-sm btn-success" data-toggle="modal" data-target="#modalAccept122">Accept</button>
+                          <button (click)="rejectTicket(list)" type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#exampleModal122">
+                            Reject
+                          </button>
+                     </span>
+                       <ng-template #second>
+                              <span *ngIf="list.accepted==='DEV ACCEPTED';else third"> <button class="btn btn-sm btn-success" [routerLink]="['/user/ticket/process/' , list.ticket.id,list.id]">View Ticket</button>
+                              </span>
+                       </ng-template>
+                      <ng-template #third>
+                              <span *ngIf="list.accepted==='DEV INPROGRESS';else fourth"> <button class="btn btn-sm btn-success" [routerLink]="['/user/ticket/process/' , list.ticket.id,list.id]">IN PROGRESS</button>
+                              </span>
+                       </ng-template>
+                      <ng-template #fourth>
+                              <span *ngIf="list.accepted==='DEV REJECTED';else fifth"> <button class="btn btn-sm btn-success" disabled >TICKET REJECTED</button>
+                              </span>
+                       </ng-template>
+                      <ng-template #fifth>
+                              <span *ngIf="list.accepted==='DEVELOPMENT DONE'"> <button class="btn btn-sm btn-success" disabled >DEVELOPMENT DONE</button>
+                              </span>
+                       </ng-template>
+
+                      <div class="modal fade" id="exampleModal122" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1232" aria-hidden="true">
+                          <div class="modal-dialog" role="document">
+                              <div class="modal-content">
+                                  <div class="modal-header">
+                                      <h5 class="modal-title" id="exampleModalLabel1232">Reject Ticket</h5>
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                          <span aria-hidden="true">&times;</span>
+                                      </button>
+                                  </div>
+                                  <div class="modal-body">
+                                      <form name="f" role="form" novalidate (ngSubmit)="save()" #f="ngForm">
+                                      <div class="form-group">
+                                          <label >Reason</label>
+                                          <input  name="reason" required minlength="5" type="text" class="form-control" [(ngModel)]=" ticketRejectedReason" >
+
+                                      </div>
+                                      </form>
+                                  </div>
+                                  <div class="modal-footer">
+                                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                      <button [disabled]="f.form.invalid" type="button" (click)="rejectTicketModelQA()" class="btn btn-primary" data-dismiss="modal">Reject</button>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="modal fade" id="modalAccept122" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel12342" aria-hidden="true">
+                          <div class="modal-dialog" role="document">
+                              <div class="modal-content">
+                                  <div class="modal-header">
+                                      <h5 class="modal-title" id="exampleModalLabel12342">Accept Ticket</h5>
+                                  </div>
+                                  <div class="modal-body">
+                                      <div class="form-group">
+                                          <p>Are you sure you want to accept the Ticket ?</p>
+                                      </div>
+                                  </div>
+                                  <div class="modal-footer">
+                                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                      <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="acceptTicketModelQA()">Accept</button>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+
+                  </span>
+              </tr>
+              </tbody>
+          </table>
+      </div>
+
+  </nb-card-body>
+
+</nb-card>
+
+
+<!--<button nbButton (click)="showToast(500)">Default 3000ms</button>-->
+

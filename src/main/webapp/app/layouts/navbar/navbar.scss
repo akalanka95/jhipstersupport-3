@@ -16,11 +16,12 @@ Navbar
 }
 
 .navbar {
+    background-color: red;
     padding: 0.2rem 1rem;
     .dropdown-item.active,
     .dropdown-item.active:focus,
     .dropdown-item.active:hover {
-        background-color: $dark;
+        background-color: $success;
     }
 
     ul.navbar-nav {
@@ -44,10 +45,14 @@ Navbar
 Logo styles
 ========================================================================== */
 .logo-img {
-    height: 45px;
-    width: 45px;
+    height: 50px;
+    width: 50px;
     display: inline-block;
     vertical-align: middle;
-    background: url('../../../content/images/logo-jhipster.png') no-repeat center center;
+    background: url('../../../content/images/Epic-Lanka.jpg') no-repeat center center;
     background-size: contain;
+}
+
+.bg-dark {
+    background-color: #1c1c33 !important;
 }

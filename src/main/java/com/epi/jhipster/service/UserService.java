@@ -1,10 +1,8 @@
 package com.epi.jhipster.service;
 
 import com.epi.jhipster.config.Constants;
-import com.epi.jhipster.domain.Authority;
-import com.epi.jhipster.domain.User;
-import com.epi.jhipster.repository.AuthorityRepository;
-import com.epi.jhipster.repository.UserRepository;
+import com.epi.jhipster.domain.*;
+import com.epi.jhipster.repository.*;
 import com.epi.jhipster.security.AuthoritiesConstants;
 import com.epi.jhipster.security.SecurityUtils;
 import com.epi.jhipster.service.dto.UserDTO;
@@ -13,6 +11,7 @@ import com.epi.jhipster.web.rest.errors.*;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -39,6 +38,17 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
 
     private final AuthorityRepository authorityRepository;
+
+    @Autowired
+    private CompanyRepository companyRepository;
+
+    @Autowired
+    private ProductModuleRepository productModuleRepository;
+
+    @Autowired
+    private CompanyProductModuleRepository companyProductModuleRepository;
+
+
 
     public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, AuthorityRepository authorityRepository) {
         this.userRepository = userRepository;
@@ -131,6 +141,28 @@ public class UserService {
         user.setLastName(userDTO.getLastName());
         user.setEmail(userDTO.getEmail().toLowerCase());
         user.setImageUrl(userDTO.getImageUrl());
+        user.setCompany(userDTO.getCompany());
+        user.setDepartment(userDTO.getDepartment());
+
+
+//        Company company = companyRepository.findByCompanyName("NSB");
+//        System.out.println("this is company#########################");
+//        System.out.println(company);
+//        user.setCompany(company);
+
+//        Iterable<Product_Module> allModules = productModuleRepository.findAll();
+//        Company_Product_Module cmp = new Company_Product_Module();
+//        cmp.setDescription("Test");
+//        cmp.setVersion("1.0V");
+//        cmp.setUser(user);
+
+//        for( Product_Module all : allModules){
+//            cmp.setProduct_module(all);
+//        }
+//
+//        companyProductModuleRepository.save(cmp);
+
+
         if (userDTO.getLangKey() == null) {
             user.setLangKey(Constants.DEFAULT_LANGUAGE); // default language
         } else {

@@ -1,3 +1,6 @@
+import { CompanyModule } from 'app/core/company.module';
+import { DepartmentModule } from 'app/core/department.module';
+
 export interface IUser {
     id?: any;
     login?: string;
@@ -12,6 +15,7 @@ export interface IUser {
     lastModifiedBy?: string;
     lastModifiedDate?: Date;
     password?: string;
+    company?: CompanyModule;
 }
 
 export class User implements IUser {
@@ -28,7 +32,9 @@ export class User implements IUser {
         public createdDate?: Date,
         public lastModifiedBy?: string,
         public lastModifiedDate?: Date,
-        public password?: string
+        public password?: string,
+        public company?: CompanyModule,
+        public department?: DepartmentModule
     ) {
         this.id = id ? id : null;
         this.login = login ? login : null;
@@ -43,5 +49,7 @@ export class User implements IUser {
         this.lastModifiedBy = lastModifiedBy ? lastModifiedBy : null;
         this.lastModifiedDate = lastModifiedDate ? lastModifiedDate : null;
         this.password = password ? password : null;
+        this.company = company ? company : null;
+        this.department = department ? department : null;
     }
 }

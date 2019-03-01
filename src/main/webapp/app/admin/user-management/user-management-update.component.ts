@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { User, UserService } from 'app/core';
+import { CompanyModule } from 'app/core/company.module';
+import { ProductModuleService } from 'app/core/create-ticket/ProductModule.service';
+import { DepartmentModule } from 'app/core/department.module';
 
 @Component({
     selector: 'jhi-user-mgmt-update',
@@ -12,8 +15,17 @@ export class UserMgmtUpdateComponent implements OnInit {
     languages: any[];
     authorities: any[];
     isSaving: boolean;
+    companyList: CompanyModule[] = [];
+    c1: CompanyModule = new CompanyModule();
+    companyDetails: boolean = true;
+    departmentList: DepartmentModule[] = [];
 
-    constructor(private userService: UserService, private route: ActivatedRoute, private router: Router) {}
+    constructor(
+        private userService: UserService,
+        private route: ActivatedRoute,
+        private router: Router,
+        private productModuleService: ProductModuleService
+    ) {}
 
     ngOnInit() {
         this.isSaving = false;
@@ -24,6 +36,32 @@ export class UserMgmtUpdateComponent implements OnInit {
         this.userService.authorities().subscribe(authorities => {
             this.authorities = authorities;
         });
+
+        this.productModuleService.getListOfCompanies().subscribe(
+            (list: CompanyModule[]) => {
+                this.companyList = list;
+            },
+            error => console.log(error)
+        );
+        this.productModuleService.getListOfDepartments().subscribe(
+            (list: DepartmentModule[]) => {
+                this.departmentList = list;
+            },
+            error => console.log(error)
+        );
+    }
+
+    selectCompany(list: CompanyModule) {
+        if (list.companyName === 'EPIC_LANKA') {
+            this.companyDetails = false;
+        } else {
+            this.companyDetails = true;
+        }
+        this.user.company = list;
+    }
+
+    selectDepartment(list: DepartmentModule) {
+        this.user.department = list;
     }
 
     previousState() {

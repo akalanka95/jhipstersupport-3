@@ -1,0 +1,251 @@
+<!--<nb-card>-->
+  <!--<nb-card-header>-->
+  <!--</nb-card-header>-->
+  <!--<nb-card-body>-->
+
+    <nb-card style="margin-right: 50px; margin-left: 50px; margin-top: 20px">
+      <nb-card-header>Create New Product</nb-card-header>
+      <nb-card-body>
+          <div class="row">
+              <div class="col-sm-6">
+                  <div class="form-group">
+                      <label>Product</label>
+                          <select class="form-control" >
+                              <option *ngFor="let list of productList" (click)="selectProductType(list)">{{list.productName}}</option>
+                          </select>
+                      </div>
+              </div>
+          </div>
+          <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label>Type</label>
+              <select  class="form-control">
+                <option (click)="selectType('Hardware')">HARDWARE</option>
+                <option (click)="selectType('Software')">SOFTWARE</option>
+              </select></div>
+          </div>
+        </div>
+          <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label >Module</label>
+              <select class="form-control">
+                <option (click)="selectProductModule(list)" *ngFor="let list of moduleModelList">{{list.module.moduleName}}</option>
+              </select></div></div>
+          </div>
+          <div class="row" [hidden]="softType">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="inputProductDescription">Description</label>
+              <input [(ngModel)]="companyProductModuleModel.description"  type="text" class="form-control" id="inputProductDescription" placeholder="Description">
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="inputProductVersion">Version</label>
+              <input [(ngModel)]="companyProductModuleModel.version" type="text" class="form-control" id="inputProductVersion" placeholder="Version">
+
+            </div>
+          </div>
+        </div>
+          <div class="row" [hidden]="hardType">
+          <div class="col-sm-4">
+            <div class="form-group">
+              <label >BRAND</label>
+              <select class="form-control" >
+                <option>Brand A</option>
+                <option>Brand B</option>
+                <option>Brand C</option>
+              </select></div></div>
+          <div class="col-sm-4">
+            <div class="form-group">
+              <label >MODEL</label>
+              <select class="form-control">
+                <option>MODEL A</option>
+                <option>MODEL B</option>
+                <option>MODEL C</option>
+              </select></div></div>
+          <div class="col-sm-4">
+            <div class="form-group">
+              <label for="inputSerialNo">Serial No</label>
+              <input  type="text" class="form-control" id="inputSerialNo" placeholder="Serial No">
+            </div>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary" (click)="createProductModule()">Create Product</button>
+      </nb-card-body>
+    </nb-card>
+
+<nb-card>
+    <nb-card-body>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                <tr jhiSort >
+                    <th><span>Product</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                    <th><span>Type</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                    <th><span>Module</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                    <th><span>Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                    <th><span>Version</span></th>
+                    <th><span>Brand</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                    <th><span>Model</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                    <th><span>Serial No</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let list of companyProductModuleList">
+                    <td>{{list.product_module.product.productName}}</td>
+                    <td>Software</td>
+                    <td>{{list.product_module.module.moduleName}}</td>
+                    <td>{{list.description}}</td>
+                    <td>{{list.version}}</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </nb-card-body>
+</nb-card>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!--<div class="row">-->
+        <!--<h4>HARDWARE</h4>-->
+        <!--<hr>-->
+      <!--<div *ngFor=" let list of companyProductHardwareList" (click)="assignProduct(list)" class="col-md-4">-->
+        <!--<nb-card>-->
+          <!--<nb-card-header>{{list.brand}} - {{list.model}} - {{list.serialNO}}</nb-card-header>-->
+          <!--<nb-card-body>Testing what is going on now and many so far</nb-card-body>-->
+        <!--</nb-card>-->
+      <!--</div>-->
+    <!--</div>-->
+
+
+    <!--<div class="row">-->
+        <!--<h4>SOFTWARE</h4>-->
+        <!--<hr>-->
+      <!--<div *ngFor=" let list of companyProductSoftwareList" (click)="assignProduct(list)" class="col-md-4">-->
+        <!--<nb-card>-->
+          <!--<nb-card-header>Version {{list.version}}</nb-card-header>-->
+          <!--<nb-card-body>{{list.description}}</nb-card-body>-->
+        <!--</nb-card>-->
+      <!--</div>-->
+    <!--</div>-->
+
+    <!--<nb-card [hidden]="userProductAssign">-->
+      <!--<nb-card-header>ASSIGN PRODUCT</nb-card-header>-->
+      <!--<nb-card-body>-->
+
+
+          <!--<div class="row">-->
+            <!--<div class="col-md-5">-->
+              <!--<nb-card>-->
+              <!--<nb-card-header>{{selectProduct.productType}} - {{selectProduct.applicationType}} - {{selectProduct.serialNO}}</nb-card-header>-->
+              <!--<nb-card-body style="padding: 20px">{{selectProduct.serialNO}}<br>{{selectProduct.model}}<br>Testing what is going on now and many so far</nb-card-body>-->
+              <!--</nb-card>-->
+            <!--</div>-->
+            <!--<div class="col-md-7">-->
+              <!--<div class="row">-->
+                <!--<div class="col-md-6">-->
+                  <!--<div class="form-group">-->
+                    <!--<label>COMPANY</label>-->
+                    <!--<select class="form-control">-->
+                      <!--<option>EPIC LANKA</option>-->
+                      <!--<option *ngFor="let list of clientCompanyList">{{list.clientCompanyName}}</option>-->
+                    <!--</select></div>-->
+                <!--</div>-->
+                <!--<div class="col-md-6">-->
+                  <!--<div class="form-group">-->
+                    <!--<label>Department</label>-->
+                    <!--<select class="form-control">-->
+                      <!--<option>HARDWARE</option>-->
+                    <!--</select></div>-->
+                <!--</div>-->
+              <!--</div>-->
+              <!--<div class="row">-->
+                <!--<div class="col-md-6">-->
+                  <!--<div class="form-group">-->
+                    <!--<label>USER</label>-->
+                    <!--<select class="form-control">-->
+                      <!--<option>HARDWARE</option>-->
+                    <!--</select></div>-->
+                <!--</div>-->
+                <!--<div class="col-md-6">-->
+                  <!--<button class="btn btn-danger" style="margin-top: 20px">ASSIGN PRODUCT</button>-->
+                <!--</div>-->
+              <!--</div>-->
+            <!--</div>-->
+          <!--</div>-->
+
+
+      <!--</nb-card-body>-->
+    <!--</nb-card>-->
+
+    <!--<div [hidden]="userProductAssign" class="row">-->
+      <!--<div class="col-md-4">-->
+        <!--<div class="form-group">-->
+          <!--<label>Product Type</label>-->
+          <!--<select class="form-control">-->
+            <!--<option>HARDWARE</option>-->
+            <!--<option>SOFTWARE</option>-->
+            <!--<option>Product C</option>-->
+          <!--</select></div>-->
+      <!--</div>-->
+      <!--<div class="col-md-4">-->
+        <!--<div class="form-group">-->
+          <!--<label>Application Type</label>-->
+          <!--<select class="form-control">-->
+            <!--<option>HARDWARE</option>-->
+            <!--<option>SOFTWARE</option>-->
+            <!--<option>Product C</option>-->
+          <!--</select></div>-->
+      <!--</div>-->
+      <!--<div class="col-md-4">-->
+        <!--<div class="form-group">-->
+          <!--<label>Version</label>-->
+          <!--<select class="form-control">-->
+            <!--<option>HARDWARE</option>-->
+            <!--<option>SOFTWARE</option>-->
+            <!--<option>Product C</option>-->
+          <!--</select></div>-->
+      <!--</div>-->
+    <!--</div>-->
+    <!--<div [hidden]="userProductAssign" class="row">-->
+      <!--<div class="col-md-4">-->
+        <!--<div class="form-group">-->
+          <!--<label>Department</label>-->
+          <!--<select class="form-control">-->
+            <!--<option>HARDWARE</option>-->
+            <!--<option>SOFTWARE</option>-->
+            <!--<option>Product C</option>-->
+          <!--</select></div>-->
+      <!--</div>-->
+      <!--<div class="col-md-4">-->
+        <!--<div class="form-group">-->
+          <!--<label>User</label>-->
+          <!--<select class="form-control">-->
+            <!--<option>HARDWARE</option>-->
+            <!--<option>SOFTWARE</option>-->
+            <!--<option>Product C</option>-->
+          <!--</select></div>-->
+      <!--</div>-->
+    <!--</div>-->
+

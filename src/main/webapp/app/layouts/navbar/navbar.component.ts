@@ -3,8 +3,9 @@ import { Router } from '@angular/router';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
 import { VERSION } from 'app/app.constants';
-import { AccountService, LoginModalService, LoginService } from 'app/core';
+import { AccountService, LoginModalService, LoginService, User } from 'app/core';
 import { ProfileService } from 'app/layouts/profiles/profile.service';
+import { ProductModuleService } from 'app/core/create-ticket/ProductModule.service';
 
 @Component({
     selector: 'jhi-navbar',
@@ -18,12 +19,14 @@ export class NavbarComponent implements OnInit {
     swaggerEnabled: boolean;
     modalRef: NgbModalRef;
     version: string;
+    currentUser: User = new User();
 
     constructor(
         private loginService: LoginService,
         private accountService: AccountService,
         private loginModalService: LoginModalService,
         private profileService: ProfileService,
+        private productService: ProductModuleService,
         private router: Router
     ) {
         this.version = VERSION ? 'v' + VERSION : '';
@@ -31,9 +34,23 @@ export class NavbarComponent implements OnInit {
     }
 
     ngOnInit() {
+        console.log('This is the current Logged user11111111');
+        console.log('This is the current Logged user11111');
+        console.log('This is the current Logged user111');
+        console.log('This is the current Logged user111');
+        console.log('This is the current Logged user111');
         this.profileService.getProfileInfo().then(profileInfo => {
             this.inProduction = profileInfo.inProduction;
             this.swaggerEnabled = profileInfo.swaggerEnabled;
+        });
+        this.productService.getCurrentLoggedUser().subscribe((user: User) => {
+            this.currentUser = user;
+            console.log('This is the current Logged user');
+            console.log('This is the current Logged user');
+            console.log('This is the current Logged user');
+            console.log('This is the current Logged user');
+            console.log('This is the current Logged user');
+            console.log(this.currentUser);
         });
     }
 

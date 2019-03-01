@@ -321,7 +321,25 @@
             <artifactId>spring-security-messaging</artifactId>
         </dependency>
         <!-- jhipster-needle-maven-add-dependency -->
+
+
+
+        <!--Twillio-->
+
+        <dependency>
+            <groupId>com.twilio.sdk</groupId>
+            <artifactId>twilio</artifactId>
+            <version>7.16.1</version>
+        </dependency>
     </dependencies>
+
+
+    <!--Web Sockets-->
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-websocket</artifactId>
+    </dependency>
+
 
     <build>
         <defaultGoal>spring-boot:run</defaultGoal>

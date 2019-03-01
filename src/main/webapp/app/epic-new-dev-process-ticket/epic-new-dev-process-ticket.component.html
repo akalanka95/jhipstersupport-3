@@ -1,0 +1,474 @@
+
+    <div class="row">
+      <div class="col-md-9">
+          <nb-card>
+          <nb-card-header (click)="viewTicketInfo()"></nb-card-header>
+          <nb-card-body >
+            <!--<div [hidden]="vietTicketInfo" class="row">-->
+              <!--<div class="col-md-4">-->
+                <!--<div class="form-group">-->
+                  <!--<label >Ticket No</label>-->
+                  <!--<input  type="text" class="form-control"  placeholder="Priority">-->
+                <!--</div>-->
+              <!--</div>-->
+            <!--</div>-->
+            <!--<div [hidden]="vietTicketInfo" class="row">-->
+              <!--<div class="col-md-8">-->
+                <!--<div class="form-group">-->
+                  <!--<label >Subject</label>-->
+                  <!--<input  type="text" class="form-control"  placeholder="Subject">-->
+                <!--</div>-->
+              <!--</div>-->
+            <!--</div>-->
+            <!--<div [hidden]="vietTicketInfo" class="row">-->
+              <!--<div class="col-md-3">-->
+                <!--<div class="form-group">-->
+                  <!--<label >Priority</label>-->
+                  <!--<input  type="text" class="form-control"  placeholder="Priority">-->
+                <!--</div>-->
+              <!--</div>-->
+              <!--<div class="col-md-3">-->
+                <!--<div class="form-group">-->
+                  <!--<label >Type</label>-->
+                  <!--<input  type="text" class="form-control"  placeholder="Type">-->
+                <!--</div>-->
+              <!--</div>-->
+              <!--<div class="col-md-3">-->
+                <!--<div class="form-group">-->
+                  <!--<label >Status</label>-->
+                  <!--<input  type="text" class="form-control"  placeholder="Status">-->
+                <!--</div>-->
+              <!--</div>-->
+              <!--<div class="col-md-3">-->
+                <!--<div class="form-group">-->
+                  <!--<label >Age</label>-->
+                  <!--<input  type="text" class="form-control"  placeholder="Age">-->
+                <!--</div>-->
+              <!--</div>-->
+            <!--</div>-->
+
+
+
+            <!--image Adding part-->
+            <div class="row">
+                <div class="col-md-2">
+                    <img style="max-width: 60% ; margin-left: 40%;" src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid"/>
+                </div>
+                <div class="col-md-6">
+                  <div class="vl">
+                  <h4><b>SUBJECT - {{ticket.subject}}</b></h4>
+                  <h5 style="color: red"><b>#T23456</b></h5>
+                      <span *ngIf="ticket.priority ==='MEDIUM'" class="badge badge-success">{{ticket.priority}}</span>
+                      <span *ngIf="ticket.priority ==='HIGH'" class="badge badge-info">{{ticket.priority}}</span>
+                      <span *ngIf="ticket.priority ==='HIGHEST'" class="badge badge-danger">{{ticket.priority}}</span>
+                      <span *ngIf="ticket.priority ==='LOW'" class="badge badge-primary">{{ticket.priority}}</span>
+                      <br>
+                  <h5></h5>
+                  </div>
+
+                </div>
+              <div class="col-md-4">
+                <label><h6>Type - {{ticket.type}}</h6></label><br>
+                <label><h6>Status - Assigned to SUPPORT</h6></label><br>
+                <label><h6>Age - 2 Days</h6> </label>
+
+              </div>
+            </div>
+
+
+            <h4>Ticket History</h4>
+              <div class="row">
+                  <div class="col-md-12"  [innerHTML]="ticket.description">
+
+                  </div>
+              </div>
+
+              <!--<p>{{ticketCommentWebSocket.ticket.user.firstName}}</p>-->
+
+            <!--<nb-tabset fullWidth (changeTab)="changeTab($event)" >-->
+              <!--<nb-tab tabTitle="All Comments">-->
+                <!--<nb-card>-->
+                  <!--<nb-stepper orientation="vertical" style="padding-left:20px; padding-top: 10px">-->
+
+                      <!--<span *ngFor="let list of ticketCommentArrya">-->
+                      <!--<nb-step  label="{{list.user.firstName}}">-->
+                      <!--<ng-template #stepLabel>-->
+          <!--<div>-->
+              <!--{{list.comment}}-->
+          <!--</div>-->
+      <!--</ng-template>-->
+                    <!--</nb-step>-->
+                          <!--</span>-->
+                  <!--</nb-stepper>-->
+                <!--</nb-card>-->
+              <!--</nb-tab>-->
+              <!--<nb-tab tabTitle=""></nb-tab>-->
+              <!--<nb-tab tabTitle=""></nb-tab>-->
+              <!--<nb-tab tabTitle=""></nb-tab>-->
+              <!--<nb-tab tabTitle=""></nb-tab>-->
+            <!--</nb-tabset>-->
+
+              <div class="container">
+                  <div class="card ">
+                      <div class="card-body anyClass">
+                          <span *ngFor="let list of ticketCommentArrya">
+                          <div  class="row">
+                              <div class="col-md-2">
+                                  <img style="max-width: 40%" src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid"/>
+
+                              </div>
+                              <div class="col-md-10">
+
+                                  <p>
+                                      <a class="float-left" href="https://maniruzzaman-akash.blogspot.com/p/contact.html"><strong>{{list.user.firstName}}</strong></a>
+                                      <br>
+                                      <small class="text-secondary" >{{list.ticketDate}} at {{list.ticketTime}}</small>
+                                      <span class="float-right"><i class="text-warning fa fa-star"></i></span>
+                                      <span class="float-right"><i class="text-warning fa fa-star"></i></span>
+                                  </p>
+                                  <div class="clearfix"></div>
+                                  <p [innerHTML]="list.comment"></p>
+                                  <p *ngIf="currentLoggedUser.id === list.user.id">
+                                      <a data-toggle="modal" data-target="#editComment"  class="float-right  ml-2" > <i class="fa fa-reply"></i> Edit</a>
+                                      <a data-toggle="modal" data-target="#deleteComment" class="float-right"> <i class="fa fa-heart"></i> Delete</a>
+                                  </p>
+                                  <div class="modal fade" id="deleteComment" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+                          <div class="modal-dialog" role="document">
+                              <div class="modal-content">
+                                  <div class="modal-header">
+                                      <h5 class="modal-title" id="exampleModalLabel1">Delete Comment</h5>
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                          <span aria-hidden="true">&times;</span>
+                                      </button>
+                                  </div>
+                                  <div class="modal-body">
+                                      Are you sure you want to delete the comment ?
+                                  </div>
+                                  <div class="modal-footer">
+                                      <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Close</button>
+                                      <button  type="button"  class="btn btn-sm btn-primary" data-dismiss="modal">Delete</button>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+
+                                  <div class="modal fade" id="editComment" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+                          <div class="modal-dialog" role="document">
+                              <div class="modal-content">
+                                  <div class="modal-header">
+                                      <h5 class="modal-title" id="exampleModalLabel2">Edit Comment</h5>
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                          <span aria-hidden="true">&times;</span>
+                                      </button>
+                                  </div>
+                                  <div class="modal-body">
+                                      <editor apiKey="test" [init]="{plugins: 'link'}" [(ngModel)]="list.comment"></editor>
+                                  </div>
+                                  <div class="modal-footer">
+                                      <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Close</button>
+                                      <button  type="button"  class="btn btn-sm btn-primary" data-dismiss="modal">Delete</button>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+
+                              </div>
+                          </div>
+                              <hr>
+                              </span>
+                          <!--<div class="card card-inner">-->
+                              <!--<div class="card-body">-->
+                                  <!--<div class="row">-->
+                                      <!--<div class="col-md-2">-->
+                                          <!--<img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid"/>-->
+                                          <!--<p class="text-secondary text-center">15 Minutes Ago</p>-->
+                                      <!--</div>-->
+                                      <!--<div class="col-md-10">-->
+                                          <!--<p><a href="https://maniruzzaman-akash.blogspot.com/p/contact.html"><strong>Maniruzzaman Akash</strong></a></p>-->
+                                          <!--<p>Lorem Ipsum is simply dummy text of the pr make  but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>-->
+                                          <!--<p>-->
+                                              <!--<a class="float-right btn btn-outline-primary ml-2">  <i class="fa fa-reply"></i> Reply</a>-->
+                                              <!--<a class="float-right btn text-white btn-danger"> <i class="fa fa-heart"></i> Like</a>-->
+                                          <!--</p>-->
+                                      <!--</div>-->
+                                  <!--</div>-->
+                              <!--</div>-->
+                          <!--</div>-->
+                      </div>
+                  </div>
+              </div>
+
+              <br>
+              <span *jhiHasAnyAuthority="'ROLE_TEAM'" [hidden]="openTicketStatusButton">
+              <button class="btn btn-sm btn-danger float-right"  data-toggle="modal" data-target="#openModal">Open Ticket</button>
+              </span>
+              <div class="modal fade" id="openModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel3" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                          <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel3">Assign Ticket</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                              </button>
+                          </div>
+                          <div class="modal-body">
+                            Ticket Will be IN-PROGRESS if you open the Ticket
+                          </div>
+                          <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                              <button (click)="openTicket()" type="button" class="btn btn-primary" data-dismiss="modal">Open Ticket</button>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+              <span *jhiHasAnyAuthority="'ROLE_TEAM_SUPERVISOR'">
+                  <span *ngIf="currentLoggedUser.department.departmentName !== 'Support'">
+                      <button class="btn btn-sm btn-success float-right" data-toggle="modal" data-target="#exampleManagerModal">Assign To</button>
+
+                      <button  type="button" class="btn btn-sm btn-danger float-right" data-toggle="modal" data-target="#exampleModal1">
+                      Reject
+                      </button>
+
+                      <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel5" aria-hidden="true">
+                      <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                      <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel5">Reject Ticket</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                      </button>
+                      </div>
+                      <div class="modal-body">
+                      <form name="f" role="form" novalidate (ngSubmit)="save()" #f="ngForm">
+                      <div class="form-group">
+                      <label >Reason</label>
+                      <input  name="reason" required minlength="5" type="text" class="form-control" [(ngModel)]=" ticketRejectedReason" >
+
+                      </div>
+                      </form>
+                      </div>
+                      <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      <button [disabled]="f.form.invalid" type="button" (click)="rejectTicketModel()" class="btn btn-primary" data-dismiss="modal">Reject</button>
+                      </div>
+                      </div>
+                      </div>
+                      </div>
+
+                  </span>
+              </span>
+
+              <span *jhiHasAnyAuthority="'ROLE_TEAM'" [hidden]="openTicketStatus">
+              <h4>Action</h4>
+            <hr>
+            <div class="row">
+              <div class="col-md-12">
+                  <editor [(ngModel)]="newTicketComment.comment" apiKey="test" [init]="{plugins: 'link'}"></editor>
+              </div>
+            </div>
+            <div class="row" style="margin-top: 10px;">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label >Attachment</label>
+                  <button class="btn btn-success" style="float: right">Drop Files To Attach</button>
+                </div>
+              </div>
+            </div>
+            <hr>
+            <button (click)="saveTicketComment()" class="btn btn-danger" style="float: right">Post Comment</button>
+            <button *jhiHasAnyAuthority="'ROLE_ADMIN'" type="button" style="float: right" class="btn  btn-success" data-toggle="modal" data-target="#exampleModal">
+              Assign To
+            </button>
+              <button *jhiHasAnyAuthority="'ROLE_TEAM'" type="button" style="float: right" class="btn  btn-success" data-toggle="modal" data-target="#exampleModal">
+                  Assign To
+              </button>
+            </span>
+
+              <span *jhiHasAnyAuthority="'ROLE_USER'">
+              <h4>Action</h4>
+            <hr>
+            <div class="row">
+              <div class="col-md-12">
+                  <editor [(ngModel)]="newTicketComment.comment" apiKey="test" [init]="{plugins: 'link'}"></editor>
+              </div>
+            </div>
+            <div class="row" style="margin-top: 10px;">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label >Attachment</label>
+                  <button class="btn btn-success" style="float: right">Drop Files To Attach</button>
+                </div>
+              </div>
+            </div>
+            <hr>
+            <button (click)="saveTicketComment()" class="btn btn-danger" style="float: right">Post Comment</button>
+            <button *jhiHasAnyAuthority="'ROLE_ADMIN'" type="button" style="float: right" class="btn  btn-success" data-toggle="modal" data-target="#exampleModal">
+              Assign To
+            </button>
+              <button *jhiHasAnyAuthority="'ROLE_TEAM'" type="button" style="float: right" class="btn  btn-success" data-toggle="modal" data-target="#exampleModal">
+                  Assign To
+              </button>
+            </span>
+
+          </nb-card-body>
+        </nb-card>
+      </div>
+      <div class="col-md-3">
+        <nb-card>
+          <nb-card-header>Product Information</nb-card-header>
+          <nb-card-body>
+
+            <div class="row">
+                <div class="form-group">
+                  <label >Warranty Expiry/Status</label>
+                  <input  type="text" class="form-control"  placeholder="Warranty Expiry/Status">
+                </div>
+              </div>
+            <div class="row">
+                <div class="form-group">
+                  <label >AMC No</label>
+                  <input  type="text" class="form-control"  placeholder="AMC No">
+                </div>
+              </div>
+            <div class="row">
+                <div class="form-group">
+                  <label >AMC Expiry/status</label>
+                  <input  type="text" class="form-control"  placeholder="AMC Expiry/status">
+                </div>
+              </div>
+
+            <div class="row">
+                <div class="form-group">
+                  <label >Brand</label>
+                  <input  type="text" class="form-control"  placeholder="Brand">
+                </div>
+              </div>
+            <div class="row">
+                <div class="form-group">
+                  <label >Model</label>
+                  <input  type="text" class="form-control"  placeholder="Model">
+                </div>
+              </div>
+            <div class="row">
+                <div class="form-group">
+                  <label >Serial No</label>
+                  <input  type="text" class="form-control"  placeholder="Serial No">
+                </div>
+              </div>
+
+            <div class="row">
+                <div class="form-group">
+                  <label >Module/Version</label>
+                  <input  type="text" class="form-control" >
+                </div>
+              </div>
+            <div class="row">
+              <div class="form-group">
+                <input  type="text" class="form-control" >
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group">
+                <input  type="text" class="form-control" >
+              </div>
+            </div>
+
+            <!--<div class="row">-->
+              <!--<div class="col-md-4">-->
+                <!--<div class="form-group">-->
+                  <!--<input  type="text" class="form-control" >-->
+                <!--</div>-->
+              <!--</div>-->
+              <!--<div class="col-md-4">-->
+                <!--<div class="form-group">-->
+                  <!--<input  type="text" class="form-control" >-->
+                <!--</div>-->
+              <!--</div>-->
+              <!--<div class="col-md-4">-->
+                <!--<div class="form-group">-->
+                  <!--<input  type="text" class="form-control">-->
+                <!--</div>-->
+              <!--</div>-->
+            <!--</div>-->
+            <!--<div class="row">-->
+              <!--<div class="col-md-4">-->
+                <!--<div class="form-group">-->
+                  <!--<input  type="text" class="form-control" >-->
+                <!--</div>-->
+              <!--</div>-->
+              <!--<div class="col-md-4">-->
+                <!--<div class="form-group">-->
+                  <!--<input  type="text" class="form-control" >-->
+                <!--</div>-->
+              <!--</div>-->
+              <!--<div class="col-md-4">-->
+                <!--<div class="form-group">-->
+                  <!--<input  type="text" class="form-control">-->
+                <!--</div>-->
+              <!--</div>-->
+            <!--</div>-->
+
+
+          </nb-card-body>
+        </nb-card>
+      </div>
+    </div>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Assign Ticket</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label >Assign To</label>
+            <select class="form-control">
+                <option (click)="selectStatus(list)" *ngFor="let list of assignStatusArray">{{list}}</option>
+                <!--<option>SOFTWARE</option>-->
+            </select></div>
+        <div class="form-group">
+          <label >Comment</label>
+            <editor apiKey="test" [init]="{plugins: 'link'}"></editor>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button (click)="assignTicket()" type="button" class="btn btn-primary" data-dismiss="modal">Assign</button>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="modal fade" id="exampleManagerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel4" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel4">Assign Ticket</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label >Assign To</label>
+                        <select class="form-control">
+                            <option (click)="selectTeamMember(list)" *ngFor="let list of assignStatusUserArray">{{list.firstName}}</option>
+                            <!--<option>SOFTWARE</option>-->
+                        </select></div>
+                    <div class="form-group">
+                        <label >Comment</label>
+                        <editor apiKey="test" [init]="{plugins: 'link'}"></editor>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button (click)="assignTicketByQAManager()" type="button" class="btn btn-primary" data-dismiss="modal">Assign</button>
+                </div>
+            </div>
+        </div>
+    </div>

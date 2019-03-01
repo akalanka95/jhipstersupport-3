@@ -13,9 +13,10 @@ import {
     SettingsComponent,
     accountState
 } from './';
+import { NbCardModule } from '@nebular/theme';
 
 @NgModule({
-    imports: [Jhipstersupport3SharedModule, RouterModule.forChild(accountState)],
+    imports: [Jhipstersupport3SharedModule, NbCardModule, RouterModule.forChild(accountState)],
     declarations: [
         ActivateComponent,
         RegisterComponent,
